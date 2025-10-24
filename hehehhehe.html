@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rumii — For My Princess</title>
+  <style>
+    :root{
+      --bg1:#ffd2df; --bg2:#fff0f6; --pink:#ff4f81; --muted:#6b6b6b;
+      --card-bg:rgba(255,255,255,0.95);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:Inter, Poppins, system-ui, sans-serif;
+      background: linear-gradient(180deg,var(--bg1),var(--bg2));
+      overflow-x:hidden;
+    }
+
+    /* Container */
+    .wrap{max-width:920px;margin:36px auto;padding:20px;position:relative}
+
+    /* Card */
+    .card{
+      background:var(--card-bg);
+      border-radius:18px;
+      padding:26px;
+      box-shadow:0 12px 40px rgba(15,20,30,0.12);
+      position:relative;
+      overflow:hidden;
+      text-align:center;
+      transition:transform .25s ease;
+    }
+    .card.heartbeat { animation: heartbeat 1s ease-in-out infinite; }
+    @keyframes heartbeat{
+      0%{transform:scale(1)}
+      25%{transform:scale(1.03)}
+      50%{transform:scale(0.98)}
+      75%{transform:scale(1.03)}
+      100%{transform:scale(1)}
+    }
+
+    h1{margin:0;font-size:26px;color:var(--pink);letter-spacing:.4px}
+    .subtitle{color:var(--muted);margin:8px 0 18px}
+
+    /* two-column */
+    .cols{display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap}
+    .left{flex:1;min-width:260px}
+    .right{width:320px;min-width:260px}
+
+    /* profile */
+    .avatar{width:120px;height:120px;border-radius:16px;overflow:hidden;margin:10px auto 6px;border:6px solid rgba(255,79,129,0.12)}
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+
+    p {color:#333;line-height:1.55}
+    .highlight{color:var(--pink);font-weight:700}
+
+    /* buttons */
+    .controls{display:flex;gap:10px;justify-content:center;margin-top:12px}
+    .btn{background:linear-gradient(90deg,var(--pink),#ff8fb3);color:#061226;padding:10px 14px;border-radius:12px;border:none;cursor:pointer;font-weight:700}
+    .iconbtn{background:transparent;border:1px solid rgba(0,0,0,0.06);padding:8px;border-radius:10px;cursor:pointer}
+
+    /* falling hearts */
+    .hearts {position:fixed;left:0;top:0;right:0;bottom:0;pointer-events:none;z-index:5}
+    .heart {
+      position:absolute;
+      font-size:20px;
+      opacity:0.95;
+      transform:translateY(-20px);
+      animation:fall linear forwards;
+      text-shadow:0 1px 2px rgba(0,0,0,0.08);
+    }
+    @keyframes fall {
+      0%{transform:translateY(-10vh) scale(1); opacity:1}
+      100%{transform:translateY(110vh) scale(.6); opacity:0}
+    }
+
+    /* sleep reminder small card */
+    .reminder{
+      background:linear-gradient(180deg,#fff,#fff7f9);
+      border-radius:12px;padding:12px;border:1px solid rgba(255,79,129,0.10);
+      text-align:left;box-shadow:0 8px 18px rgba(15,20,30,0.06);
+    }
+    .reminder h3{margin:0;color:var(--pink)}
+    .reminder p{margin:8px 0 0;color:#444}
+
+    /* hidden message modal-like */
+    .hiddenMsg{
+      margin-top:14px;padding:12px;border-radius:12px;background:linear-gradient(90deg,#fff8fb,#fff1f6);border:1px solid rgba(255,79,129,0.08);display:none;
+      box-shadow:0 6px 18px rgba(15,20,30,0.06)
+    }
+
+    /* footer glow */
+    footer{
+      margin-top:20px;text-align:center;color:var(--muted);font-size:13px;
+    }
+    .glow{
+      display:inline-block;padding:6px 12px;border-radius:999px;background:linear-gradient(90deg,#fff,#fff);
+      box-shadow:0 0 16px rgba(255,79,129,0.18);
+      color:var(--pink);font-weight:700;
+    }
+
+    /* responsive */
+    @media (max-width:880px){
+      .cols{flex-direction:column}
+      .right{order:2}
+    }
+  </style>
+</head>
+<body>
+  <!-- falling hearts container -->
+  <div class="hearts" id="hearts"></div>
+
+  <div class="wrap">
+    <div class="card" id="mainCard">
+      <div class="avatar">
+        <!-- Replace with Rumii's photo file name or URL -->
+        <img src="https://via.placeholder.com/400x400.png?text=Rumii+Princess" alt="Rumii Princess">
+      </div>
+
+      <h1>You Are My Princess, <span class="highlight">Rumii</span> 👑</h1>
+      <div class="subtitle">From the heart of <strong>Hasii</strong> — with endless duas & care</div>
+
+      <!-- Title-ke-niche romantic dua (small) -->
+      <p style="font-style:italic;color:#b3476a;margin:6px 0 18px;">
+        "Har din meri dua hai ke tumhara subah muskurahat se ho aur har raat tum parhaizgaar sukoon se ho."
+      </p>
+
+      <div class="cols">
+        <div class="left">
+          <p>
+            Kabhi kabhi sochta hoon, <span class="highlight">Allah</span> ne mujhe kyun itni pyaari dost di? Phir dil kehta hai:
+            <span class="highlight">"Rumii, tum mere liye rehmat ho."</span>
+          </p>
+
+          <!-- beech mein detailed mohabbat & care line -->
+          <div style="margin-top:12px;padding:12px;border-radius:12px;background:linear-gradient(90deg,#fff9fb,#fff6f8);border:1px solid rgba(255,79,129,0.06);">
+            <em>"Main har pal tumhari khushi ke liye dua karta hoon. Tumhari muskurahat meri rooh ko sukoon deti hai — aur main tumhari care apne dil se karta hoon."</em>
+          </div>
+
+          <!-- hidden message area (revealed on button click) -->
+          <div id="hiddenMsg" class="hiddenMsg" aria-hidden="true">
+            <strong>Special Message for Rumii:</strong>
+            <p style="margin:8px 0 0;">Tumhari har ek muskurahat mere liye dua hai. Hasii hamesha tumhara khayal rakhega — choti choti baton se le kar bade sapnon tak.</p>
+          </div>
+
+          <!-- controls -->
+          <div class="controls" style="margin-top:14px;">
+            <button class="btn" id="surpriseBtn">Tap to feel my heart 💓</button>
+            <button class="iconbtn" id="muteBtn" title="Play / Pause Music">🔊</button>
+          </div>
+
+          <!-- sleep reminder (cute & funny) -->
+          <div style="margin-top:14px;">
+            <div class="reminder">
+              <h3>Sleep Reminder 😴</h3>
+              <p>Rumii Princess — thori si kam so jao warna sapnon mei bhi Hasii aa jayega! (Mission: 1 alarm extra 👍)</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="right">
+          <div style="padding:10px;border-radius:12px;background:linear-gradient(90deg,#fff,#fff8fb);border:1px solid rgba(0,0,0,0.03)">
+            <h3 style="margin:6px 0;color:var(--pink)">Dua & Care</h3>
+            <p style="margin:0;color:#555">Hasii ki dil se dua — ke tum hamesha khush, safe aur blessed raho. Uski har choti khushi Hasii ke liye duaon ka sabab hai. 🩷🙏</p>
+          </div>
+
+          <div style="margin-top:12px;text-align:center">
+            <div style="font-size:30px;margin-top:6px;">✨</div>
+            <p style="color:#666;font-size:14px;margin-top:6px">Click the heart button and share this page to surprise Rumii!</p>
+          </div>
+        </aside>
+      </div>
+
+      <!-- end heartfelt closing dua -->
+      <p style="margin-top:18px;font-weight:700;color:#b3476a">
+        "Meri dua hai ke Allah tumhari zindagi ko pyar, sukoon aur muskurahat se bharde. Hasii hamesha tumhara saath chahta hai."
+      </p>
+
+      <footer>
+        <span class="glow">Made with Love by Hasii 💘</span>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Background music (place music.mp3 in same folder, or replace src with an online mp3) -->
+  <audio id="bgMusic" loop preload="auto" src="music.mp3"></audio>
+
+  <script>
+    /* --------- Music control --------- */
+    const audio = document.getElementById('bgMusic');
+    const muteBtn = document.getElementById('muteBtn');
+
+    function updateMuteIcon(isPlaying){
+      muteBtn.textContent = isPlaying ? '🔊' : '🔈';
+    }
+
+    // Try to autoplay (may be blocked by browser)
+    audio.volume = 0.6;
+    audio.play().then(()=> {
+      updateMuteIcon(true);
+    }).catch(()=> {
+      // autoplay blocked; will play on user interaction
+      updateMuteIcon(false);
+    });
+
+    muteBtn.addEventListener('click', ()=>{
+      if (audio.paused) {
+        audio.play().then(()=> updateMuteIcon(true)).catch(()=> updateMuteIcon(false));
+      } else {
+        audio.pause();
+        updateMuteIcon(false);
+      }
+      // also trigger small heartbeat on click
+      triggerHeartbeat(1);
+    });
+
+    /* --------- Surprise hidden message toggle --------- */
+    const surpriseBtn = document.getElementById('surpriseBtn');
+    const hiddenMsg = document.getElementById('hiddenMsg');
+    surpriseBtn.addEventListener('click', ()=>{
+      const showing = hiddenMsg.style.display === 'block';
+      hiddenMsg.style.display = showing ? 'none' : 'block';
+      hiddenMsg.setAttribute('aria-hidden', showing ? 'true' : 'false');
+
+      // Play music if paused (user interaction usually unblocks autoplay)
+      if (audio.paused) { audio.play().then(()=> updateMuteIcon(true)).catch(()=>{}); }
+
+      // small heartbeat and spawn extra hearts for effect
+      triggerHeartbeat(2);
+      spawnManyHearts(6);
+    });
+
+    /* --------- Heartbeat animation helper --------- */
+    const mainCard = document.getElementById('mainCard');
+    let hbTimeout;
+    function triggerHeartbeat(times=1){
+      mainCard.classList.add('heartbeat');
+      clearTimeout(hbTimeout);
+      hbTimeout = setTimeout(()=> mainCard.classList.remove('heartbeat'), 1000 * times + 200);
+    }
+
+    /* --------- Falling hearts generator --------- */
+    const heartsContainer = document.getElementById('hearts');
+    function spawnHeart(xPercent){
+      const el = document.createElement('div');
+      el.className = 'heart';
+      // various heart shapes - using emoji for simplicity
+      el.textContent = Math.random()>0.5 ? '❤️' : '💖';
+      const size = 16 + Math.random()*28;
+      el.style.fontSize = size + 'px';
+      const left = (xPercent !== undefined) ? xPercent : Math.random()*100;
+      el.style.left = left + 'vw';
+      const dur = 6 + Math.random()*6;
+      el.style.animationDuration = dur + 's';
+      const delay = Math.random()*1;
+      el.style.animationDelay = delay + 's';
+      heartsContainer.appendChild(el);
+      // cleanup
+      setTimeout(()=> { el.remove(); }, (dur + delay) * 1000 + 500);
+    }
+
+    function spawnManyHearts(n=8){
+      for(let i=0;i<n;i++){
+        setTimeout(()=> spawnHeart(), i*120);
+      }
+    }
+
+    // gentle continuous hearts
+    setInterval(()=> spawnManyHearts(3), 1800);
+
+    /* --------- optional: spawn small hearts on page load once --------- */
+    window.addEventListener('load', ()=> {
+      spawnManyHearts(8);
+      // soft heartbeat
+      setTimeout(()=> triggerHeartbeat(1), 900);
+    });
+
+    /* --------- Share shortcut (click footer glow to copy page) --------- */
+    document.querySelector('.glow').addEventListener('click', ()=>{
+      const text = `For Rumii Princess — from Hasii. Open this page to read a special message.`;
+      if (navigator.share) {
+        navigator.share({title:'For Rumii', text});
+      } else {
+        navigator.clipboard.writeText(location.href).then(()=> {
+          alert('Link copied! Share it with Rumii 💞');
+        }).catch(()=> {
+          alert('Share your page link with Rumii ❤️');
+        });
+      }
+    });
+
+  </script>
+</body>
+</html>
